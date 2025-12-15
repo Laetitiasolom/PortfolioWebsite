@@ -295,7 +295,7 @@ defaults:
 # Sass/SCSS
 sass:
   sass_dir: _sass
-  style: compressed # https://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
+  style: expanded # changed from compressed to debug
 
 
 # Outputting
@@ -313,6 +313,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-redirect-from
   - jemoji
+  - jekyll-sass-converter
 
 # Mimic GitHub Pages with --safe
 whitelist:

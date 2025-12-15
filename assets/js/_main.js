@@ -6,7 +6,7 @@
 // "system". Default is "system".
 let determineThemeSetting = () => {
   let themeSetting = localStorage.getItem("theme");
-  return (themeSetting != "dark" && themeSetting != "light" && themeSetting != "system") ? "system" : themeSetting;
+  return (themeSetting != "dark" && themeSetting != "light" && themeSetting != "nordic" && themeSetting != "system") ? "system" : themeSetting;
 };
 
 // Determine the computed theme, which can be "dark" or "light". If the theme setting is
@@ -32,17 +32,31 @@ let setTheme = (theme) => {
 
   if (use_theme === "dark") {
     $("html").attr("data-theme", "dark");
-    $("#theme-icon").removeClass("fa-sun").addClass("fa-moon");
+    $("#theme-icon").removeClass("fa-sun fa-tree").addClass("fa-moon");
+  } else if (use_theme === "nordic") {
+    $("html").attr("data-theme", "nordic");
+    $("#theme-icon").removeClass("fa-sun fa-moon").addClass("fa-tree");
   } else if (use_theme === "light") {
     $("html").removeAttr("data-theme");
-    $("#theme-icon").removeClass("fa-moon").addClass("fa-sun");
+    $("#theme-icon").removeClass("fa-moon fa-tree").addClass("fa-sun");
   }
 };
 
 // Toggle the theme manually
 var toggleTheme = () => {
-  const current_theme = $("html").attr("data-theme");
-  const new_theme = current_theme === "dark" ? "light" : "dark";
+  const current_theme = determineThemeSetting();
+  // Cycle: Light -> Nordic -> Dark -> Light
+  // If system/unknown, assume Light start -> Nordic
+  let new_theme = "light";
+
+  if (current_theme === "light" || current_theme === "system") {
+    new_theme = "nordic";
+  } else if (current_theme === "nordic") {
+    new_theme = "dark";
+  } else {
+    new_theme = "light";
+  }
+
   localStorage.setItem("theme", new_theme);
   setTheme(new_theme);
 };
@@ -93,11 +107,11 @@ $(document).ready(function () {
   // If the user hasn't chosen a theme, follow the OS preference
   setTheme();
   window.matchMedia('(prefers-color-scheme: dark)')
-        .addEventListener("change", (e) => {
-          if (!localStorage.getItem("theme")) {
-            setTheme(e.matches ? "dark" : "light");
-          }
-        });
+    .addEventListener("change", (e) => {
+      if (!localStorage.getItem("theme")) {
+        setTheme(e.matches ? "dark" : "light");
+      }
+    });
 
   // Enable the theme toggle
   $('#theme-toggle').on('click', toggleTheme);
@@ -114,7 +128,8 @@ $(document).ready(function () {
     if (didResize) {
       didResize = false;
       bumpIt();
-    }}, 250);
+    }
+  }, 250);
   var didResize = false;
   bumpIt();
 
