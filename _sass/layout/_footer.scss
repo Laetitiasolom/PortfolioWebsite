@@ -14,17 +14,16 @@
   clear: both;
 
   /* sticky footer fix start */
-  position: absolute;
-  bottom: 0em;
-  height: auto;
+  position: relative;
+  margin-top: auto;
   /* sticky footer fix end */
 
   margin-top: 3em;
 
   -webkit-animation: intro 0.3s both;
-          animation: intro 0.3s both;
+  animation: intro 0.3s both;
   -webkit-animation-delay: 0.45s;
-          animation-delay: 0.45s;
+  animation-delay: 0.45s;
   border-top: 1px solid var(--global-dark-border-color);
 
   footer {
@@ -78,7 +77,7 @@
     text-transform: uppercase;
   }
 
-  li + li:before {
+  li+li:before {
     content: "";
     padding-right: 5px;
   }

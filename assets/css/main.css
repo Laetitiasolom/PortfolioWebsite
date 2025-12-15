@@ -71,52 +71,129 @@ html[data-theme="dark"] {
   --global-text-color-light: #f3f3f3;
   --global-thead-color: #ededed; }
 
-/* ==========================================================================
-   NORDIC THEME
-   ========================================================================== */
+/* Muted Blue/Grey as requested */
+/* Forest Green */
 html[data-theme="nordic"] {
-  --global-base-color: #2C3E50;
+  --global-base-color: #607D8B;
   --global-bg-color: #E8EEF2;
-  --global-footer-bg-color: #dce2e6;
+  --global-footer-bg-color: #f4f7f9;
   --global-border-color: #d1d6da;
-  --global-dark-border-color: #a7abae;
+  --global-dark-border-color: #98a4ad;
   --global-code-background-color: #f4f7f9;
-  --global-code-text-color: #2C3E50;
-  --global-fig-caption-color: #6b7885;
+  --global-code-text-color: #607D8B;
+  --global-fig-caption-color: #99aeb8;
   --global-link-color: #2E8B57;
-  --global-link-color-hover: #27764a;
-  --global-link-color-visited: #58a279;
-  --global-masthead-link-color: #2C3E50;
+  --global-link-color-hover: #21653f;
+  --global-link-color-visited: #3bb16f;
+  --global-masthead-link-color: #607D8B;
   --global-masthead-link-color-hover: #2E8B57;
-  --global-text-color: #2C3E50;
-  --global-text-color-light: #6b7885;
-  --global-thead-color: #d1d6da; }
+  --global-text-color: #607D8B;
+  --global-text-color-light: #99aeb8;
+  --global-thead-color: #d1d6da;
+  /* Background Image with Increased Opacity */
+  /* Standard Layout overrides for Nordic Theme */
+  /* Standard Layout overrides for Nordic Theme */
+  /* Fix for Archive/Publication Pages centering issues */
+  /* Adjust Grid for Split Layout consistency */
+  /* Sidebar Styling - Big Profile Photo Overlap */ }
   html[data-theme="nordic"] body {
-    background-image: url("../../images/themes/nordic-bg.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
+    position: relative;
+    background-color: #E8EEF2;
     font-family: "Futura", "Century Gothic", "Avant Garde", "Tw Cen MT", sans-serif; }
+    html[data-theme="nordic"] body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("../../images/themes/nordic-bg.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.5;
+      /* Increased opacity for better visibility as requested */
+      z-index: -1;
+      pointer-events: none; }
   html[data-theme="nordic"] .page__content {
     background: rgba(255, 255, 255, 0.85);
+    /* Restore slight card effect for readability */
     padding: 2em;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    backdrop-filter: blur(5px); }
+    backdrop-filter: blur(5px);
+    margin-top: 2em;
+    margin-bottom: 2em;
+    /* Removed width: 100% and max-width override to let Susy grid handle it */
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    /* Context for children */
+    z-index: 10;
+    /* Ensure content stays above background */ }
+  html[data-theme="nordic"] .archive {
+    /* Removed width: 100% to restore sidebar compatibility */
+    /* Only apply max-width if needed, but Susy handles columns */
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 0;
+    /* Remove default padding causing shift */ }
+  @media (min-width: 64em) {
+    html[data-theme="nordic"] .page {
+      padding-right: 0;
+      /* Fixes right-padding issue in standard layouts */ } }
+  html[data-theme="nordic"] .sidebar {
+    background: transparent;
+    margin-top: -80px;
+    /* Pull sidebar up to overlap header */
+    z-index: 20;
+    position: relative; }
+    html[data-theme="nordic"] .sidebar .author__avatar img {
+      width: 200px;
+      /* Bigger profile photo */
+      height: 200px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      /* White border for contrast against header/bg */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      object-fit: cover; }
+    html[data-theme="nordic"] .sidebar .author__name {
+      font-family: "Futura", "Century Gothic", "Avant Garde", "Tw Cen MT", sans-serif;
+      color: #607D8B;
+      margin-top: 1em; }
+    html[data-theme="nordic"] .sidebar .author__bio {
+      color: #99aeb8; }
   html[data-theme="nordic"] .masthead {
-    background: rgba(232, 238, 242, 0.95);
-    border-bottom: 1px solid #d1d6da; }
+    /* Clean Background, Gradient on Text */
+    background: rgba(255, 255, 255, 0.95);
+    /* Light/Clean background */
+    border-bottom: 1px solid #d1d6da;
+    padding-bottom: 2em;
+    /* Extra padding for overlap space */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); }
     html[data-theme="nordic"] .masthead .masthead__inner-wrap {
-      font-family: "Futura", "Century Gothic", "Avant Garde", "Tw Cen MT", sans-serif; }
-    html[data-theme="nordic"] .masthead .masthead__menu-item:not(#theme-toggle) a {
-      background: linear-gradient(135deg, #2C3E50, #2E8B57);
+      font-family: "Futura", "Century Gothic", "Avant Garde", "Tw Cen MT", sans-serif;
+      max-width: 1280px;
+      /* Match content width */ }
+    html[data-theme="nordic"] .masthead .site-title {
+      /* Gradient Text */
+      background: linear-gradient(135deg, #2F4F4F 0%, #2E8B57 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      font-weight: 700;
-      transition: opacity 0.3s ease; }
+      background-clip: text;
+      color: transparent;
+      font-size: 2em;
+      font-weight: 800;
+      /* Bolder to make gradient visible */ }
+    html[data-theme="nordic"] .masthead .masthead__menu-item:not(#theme-toggle) a {
+      color: #607D8B;
+      /* Standard text color on light bg */
+      font-weight: 600;
+      transition: color 0.3s ease; }
       html[data-theme="nordic"] .masthead .masthead__menu-item:not(#theme-toggle) a:hover {
-        opacity: 0.8; }
+        color: #2E8B57;
+        /* Accent color on hover */
+        text-decoration: underline; }
 
 /* ==========================================================================
    MIXINS
@@ -323,14 +400,23 @@ body {
   background-color: var(--global-bg-color);
   margin: 0;
   padding: 70px 0 0;
-  padding-bottom: 9em;
+  padding-bottom: 0;
+  /* Remove padding-bottom as footer margin-top handles spacing */
   font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
-  line-height: 1.5; }
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; }
   body.overflow--hidden {
     /* when primary navigation is visible, the content in the background won't scroll */
     overflow: hidden; }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 2em 0 0.5em;
   line-height: 1.2;
   font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
@@ -355,7 +441,8 @@ h5 {
 h6 {
   font-size: 0.75em; }
 
-small, .small {
+small,
+.small {
   font-size: 0.75em; }
 
 p {
@@ -373,7 +460,15 @@ del a {
   color: inherit; }
 
 /* reduce orphans and widows when printing */
-p, pre, blockquote, ul, ol, dl, figure, table, fieldset {
+p,
+pre,
+blockquote,
+ul,
+ol,
+dl,
+figure,
+table,
+fieldset {
   orphans: 3;
   widows: 3; }
 
@@ -402,7 +497,11 @@ a:hover, a:active {
   outline: 0; }
 
 /* code */
-tt, code, kbd, samp, pre {
+tt,
+code,
+kbd,
+samp,
+pre {
   font-family: Monaco, Consolas, "Lucida Console", monospace; }
 
 pre {
@@ -559,7 +658,29 @@ nav {
   100% {
     opacity: 1; } }
 /* Global animation transition */
-b, i, strong, em, blockquote, p, q, span, figure, img, h1, h2, header, input, a, tr, td, form button, input[type="submit"], .btn, #goog-wm-sb, .highlight, .archive__item-teaser {
+b,
+i,
+strong,
+em,
+blockquote,
+p,
+q,
+span,
+figure,
+img,
+h1,
+h2,
+header,
+input,
+a,
+tr,
+td,
+form button,
+input[type="submit"],
+.btn,
+#goog-wm-sb,
+.highlight,
+.archive__item-teaser {
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out; }
 
@@ -1743,9 +1864,8 @@ tr, td, th {
   width: 100%;
   clear: both;
   /* sticky footer fix start */
-  position: absolute;
-  bottom: 0em;
-  height: auto;
+  position: relative;
+  margin-top: auto;
   /* sticky footer fix end */
   margin-top: 3em;
   -webkit-animation: intro 0.3s both;
